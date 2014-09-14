@@ -25,11 +25,9 @@
 
 @interface MTLHALResource : MTLModel<MTLJSONSerializing>
 
-@property (nonatomic, strong) NSString *resourceKey;
+@property (nonatomic, strong, readonly) NSDictionary *links;
+@property (nonatomic, strong, readonly) NSString *resourceRelation;
 
-- (MTLHALLink *)linkForRelation:(NSString *)relation;
-- (MTLHALLink *)linkForRelation:(NSString *)relation name:(NSString *)name;
-- (NSArray *)linksForRelation:(NSString *)relation;
 - (MTLHALResource *)resourceForRelation:(NSString *)relation;
 - (NSArray *)resourcesForRelation:(NSString *)relation;
 - (NSString *)extendedHrefForRelation:(NSString *)relation;

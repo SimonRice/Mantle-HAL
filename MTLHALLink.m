@@ -25,7 +25,9 @@
 @implementation MTLHALLink
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-    return @{ };
+    return @{
+             @"isTemplated" : @"templated"
+             };
 }
 
 @end

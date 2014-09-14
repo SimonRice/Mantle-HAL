@@ -22,15 +22,5 @@
 
 #import <Mantle/Mantle.h>
 
-@interface MTLHALLink : MTLModel<MTLJSONSerializing>
-
-@property (nonatomic, strong, readonly) NSString *href;
-@property (nonatomic, strong, readonly) NSString *type;
-@property (nonatomic, strong, readonly) NSString *deprecation;
-@property (nonatomic, strong, readonly) NSString *profile;
-@property (nonatomic, strong, readonly) NSString *title;
-@property (nonatomic, strong, readonly) NSString *name;
-@property (nonatomic, strong, readonly) NSString *hreflang;
-@property (nonatomic, readonly) BOOL isTemplated;
-
-@end
+#import "MTLHALResource.h"
+#import "MTLHALLink.h"

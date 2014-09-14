@@ -24,7 +24,6 @@
 
 @interface MTLHALResource()
 
-@property (nonatomic, strong, readonly) NSDictionary *links;
 @property (nonatomic, strong, readonly) NSDictionary *curies;
 @property (nonatomic, strong, readonly) NSDictionary *embedded;
 
@@ -81,7 +80,7 @@ static NSMutableDictionary *p_classesForRelations;
             NSArray *resourcesForKey = [MTLJSONAdapter modelsOfClass:targetClass fromJSONArray:embedded[key] error:nil];
             
             for (MTLHALResource *resource in resourcesForKey) {
-                resource.resourceKey = key;
+                [resource setValue:key forKey:@"resourceRelation"];
             }
             
             [allEmbedded setObject:resourcesForKey forKey:key];
@@ -92,8 +91,8 @@ static NSMutableDictionary *p_classesForRelations;
 }
 
 - (NSString *)extendedHrefForRelation:(NSString *)relation {
-    if ([relation isEqualToString:@"self"] && self.resourceKey)
-        relation = self.resourceKey;
+    if ([relation isEqualToString:@"self"] && self.resourceRelation)
+        relation = self.resourceRelation;
     
     NSArray *components = [relation componentsSeparatedByString:@":"];
     if (components.count < 2)
@@ -111,24 +110,6 @@ static NSMutableDictionary *p_classesForRelations;
             return curie;
     }
     return nil;
-}
-
-- (MTLHALLink *)linkForRelation:(NSString *)relation {
-    NSArray *links = [self linksForRelation:relation];
-    return [links count] > 0 ? links[0] : nil;
-}
-
-- (MTLHALLink *)linkForRelation:(NSString *)relation name:(NSString *)name {
-    NSArray *links = [self linksForRelation:relation];
-    for (MTLHALLink *link in links) {
-        if ([name isEqualToString:link.name])
-            return link;
-    }
-    return nil;
-}
-
-- (NSArray *)linksForRelation:(NSString *)relation {
-    return self.links[relation];
 }
 
 - (NSArray *)resourcesForRelation:(NSString *)relation {
