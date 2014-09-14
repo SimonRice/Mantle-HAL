@@ -32,6 +32,7 @@
 - (NSArray *)linksForRelation:(NSString *)relation;
 - (MTLHALResource *)resourceForRelation:(NSString *)relation;
 - (NSArray *)resourcesForRelation:(NSString *)relation;
+- (NSString *)extendedHrefForRelation:(NSString *)relation;
 
 + (void)registerClass:(__unsafe_unretained Class)class forRelation:(NSString *)relation;
 

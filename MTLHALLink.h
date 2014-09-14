@@ -31,7 +31,6 @@
 @property (nonatomic, strong, readonly) NSString *title;
 @property (nonatomic, strong, readonly) NSString *name;
 @property (nonatomic, strong, readonly) NSString *hreflang;
-@property (nonatomic, strong, readonly) NSString *extendedLinkHref;
 @property (nonatomic, readonly) BOOL templated;
 
 @end

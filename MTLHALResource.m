@@ -91,15 +91,7 @@ static NSMutableDictionary *p_classesForRelations;
     }];
 }
 
-- (NSString *)p_extendedHrefForLink:(MTLHALLink *)link fromCurie:(MTLHALLink *)curie {
-    NSString *linkHref = link.href;
-    if ([linkHref hasPrefix:@"/"])
-        linkHref = [linkHref substringFromIndex:1];
-    
-    return [curie.href stringByReplacingOccurrencesOfString:@"{rel}" withString:linkHref];
-}
-
-- (MTLHALLink *)p_curieForRelation:(NSString *)relation {
+- (NSString *)extendedHrefForRelation:(NSString *)relation {
     if ([relation isEqualToString:@"self"] && self.resourceKey)
         relation = self.resourceKey;
     
@@ -107,7 +99,10 @@ static NSMutableDictionary *p_classesForRelations;
     if (components.count < 2)
         return nil;
     
-    return [self p_curieForNamespace:components[0]];
+    MTLHALLink *curie = [self p_curieForNamespace:components[0]];
+    NSString *relationParamter = [relation substringFromIndex:[components[0] length] + 1];
+    
+    return [curie.href stringByReplacingOccurrencesOfString:@"{rel}" withString:relationParamter];
 }
 
 - (MTLHALLink *)p_curieForNamespace:(NSString *)namespace {
@@ -133,19 +128,7 @@ static NSMutableDictionary *p_classesForRelations;
 }
 
 - (NSArray *)linksForRelation:(NSString *)relation {
-    NSArray *links = self.links[relation];
-    MTLHALLink *curie = [self p_curieForRelation:relation];
-    
-    if (!curie || !links || links.count == 0)
-        return links;
-    
-    NSArray *curiedLinks = [NSArray array];
-    for (MTLHALLink *link in links) {
-        [link setValue:[self p_extendedHrefForLink:link fromCurie:curie] forKey:@"extendedLinkHref"];
-        curiedLinks = [curiedLinks arrayByAddingObject:link];
-    }
-    
-    return curiedLinks;
+    return self.links[relation];
 }
 
 - (NSArray *)resourcesForRelation:(NSString *)relation {
