@@ -24,13 +24,47 @@
 
 @interface MTLHALLink : MTLModel<MTLJSONSerializing>
 
+/** This required value is either a URI or a URI Template.
+ *
+ *  If the value is a URI Template then @see isTemplated should be true.
+ */
 @property (nonatomic, strong, readonly) NSString *href;
+
+
+/** The expected MIME type at the target resource. */
 @property (nonatomic, strong, readonly) NSString *type;
+
+
+/** An indication that the link is deprecated.  Its value is a URL that 
+ *  should provide further information about the deprecation. 
+ */
 @property (nonatomic, strong, readonly) NSString *deprecation;
+
+
+/** A URL string that hints about the profile (@see 
+ * https://tools.ietf.org/html/draft-wilde-profile-link-04 ) of the
+ * target resource.
+ */
 @property (nonatomic, strong, readonly) NSString *profile;
+
+
+/** A human-readable identifier for the link. */
 @property (nonatomic, strong, readonly) NSString *title;
+
+
+/** A secondary key for selecting Link Objects which share the 
+ *  same relation. 
+ */
 @property (nonatomic, strong, readonly) NSString *name;
+
+
+/** The language of the target resource. */
 @property (nonatomic, strong, readonly) NSString *hreflang;
+
+
+/** When the @see href property is a URI Template, this value
+ *  should be true.  Otherwise, it is false
+ */
 @property (nonatomic, readonly) BOOL isTemplated;
 
 @end
