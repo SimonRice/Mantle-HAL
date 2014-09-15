@@ -32,11 +32,46 @@
 /** The relation key for the resource when embedded in another resource */
 @property (nonatomic, strong, readonly) NSString *resourceRelation;
 
-
+/** 
+ *  An embedded resource as specified by the relation key.
+ *
+ *  @warning Embedded Resources may be a full, partial, or inconsistent 
+ *  version of the representation served from the target URI.  The self
+ *  link will point to the full version of the resource.
+ *
+ *  @param relation The key of the link's relation.
+ */
 - (MTLHALResource *)resourceForRelation:(NSString *)relation;
+
+
+/**
+ *  A list of embedded resources as specified by the relation key.
+ *
+ *  @warning Embedded Resources may be a full, partial, or inconsistent
+ *  version of the representation served from the target URI.  The self
+ *  link will point to the full version of the resource.
+ *
+ *  @param relation The key of the link's relation.
+ */
 - (NSArray *)resourcesForRelation:(NSString *)relation;
+
+
+/** 
+ *  A URL string as specified by the relation's CURIE pointing to 
+ *  documentation about the relation.
+ *
+ *  @param relation The CURIEd relation key.
+ */
 - (NSString *)extendedHrefForRelation:(NSString *)relation;
 
+/**
+ *  Assigns a relation key to a particular class.  This means all embedded 
+ *  objects in a particular relation for all resources will automatically be 
+ *  serialised to this class.
+ *
+ *  @param relation The relation key to assign
+ *  @param class The class to assign the relation to.
+ */
 + (void)registerClass:(__unsafe_unretained Class)class forRelation:(NSString *)relation;
 
 @end
