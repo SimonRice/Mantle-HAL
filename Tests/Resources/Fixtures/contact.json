@@ -9,7 +9,7 @@
       {
         "href": "http://tempuri.org/rels/address/{rel}",
         "name": "addr",
-        "templated": "true"
+        "templated": true
       }
     ],
     "addr:home": {

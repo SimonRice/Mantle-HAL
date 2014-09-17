@@ -14,7 +14,7 @@
 #import "Contact.h"
 #import "Address.h"
 
-SpecBegin(Thing)
+SpecBegin(Contact)
 
 describe(@"Contact", ^{
     __block Contact *contact = nil;
@@ -41,6 +41,35 @@ describe(@"Contact", ^{
     it(@"should have its own fields populated correctly", ^{
         expect(contact.firstName).to.equal(@"Henry");
         expect(contact.lastName).to.equal(@"Ford");
+    });
+    
+    it(@"should have its links populated correctly", ^{
+        expect([contact.links[@"self"][0] href]).to.equal(@"http://tempuri.org/contacts/1234");
+        expect([contact.links[@"addr:home"][0] href]).to.equal(@"http://tempuri.org/address/827");
+        expect([contact.links[@"addr:work"][0] href]).to.equal(@"http://tempuri.org/address/6421");
+    });
+    
+    it(@"should have its documentation URL expanded correctly", ^{
+        expect([contact extendedHrefForRelation:@"addr:home"]).to.equal(@"http://tempuri.org/rels/address/home");
+        expect([contact extendedHrefForRelation:@"addr:work"]).to.equal(@"http://tempuri.org/rels/address/work");
+    });
+    
+    it(@"should have its home address (embedded resource) correctly set up", ^{
+        Address *homeAddress = contact.homeAddress;
+        
+        expect(homeAddress).toNot.beNil;
+        expect(homeAddress.street).to.equal(@"123 Main Street");
+        expect(homeAddress.city).to.equal(@"Detroit");
+        expect(homeAddress.state).to.equal(@"MI");
+    });
+    
+    it(@"should have its work address (embedded resource) correctly set up", ^{
+        Address *workAddress = contact.workAddress;
+        
+        expect(workAddress).toNot.beNil;
+        expect(workAddress.street).to.equal(@"1 Ford Drive");
+        expect(workAddress.city).to.equal(@"Detroit");
+        expect(workAddress.state).to.equal(@"MI");
     });
 });
 

@@ -69,19 +69,23 @@ static NSMutableDictionary *p_classesForRelations;
 }
 
 + (NSValueTransformer *)embeddedJSONTransformer {
-    return [MTLValueTransformer transformerWithBlock:^id(NSDictionary *embedded) {
+    return [MTLValueTransformer transformerWithBlock:^id(NSDictionary *embeddeDictionary) {
         NSMutableDictionary *allEmbedded = [NSMutableDictionary dictionary];
         
-        for (NSString *key in embedded.allKeys) {
+        for (NSString *key in embeddeDictionary.allKeys) {
             __unsafe_unretained Class targetClass = p_classesForRelations[key];
             if (!targetClass)
                 targetClass = MTLHALResource.class;
             
-            NSArray *resourcesForKey = [MTLJSONAdapter modelsOfClass:targetClass fromJSONArray:embedded[key] error:nil];
+            NSArray *resourcesForKey = nil;
             
-            for (MTLHALResource *resource in resourcesForKey) {
+            if ([embeddeDictionary[key] isKindOfClass:NSArray.class])
+                resourcesForKey = [MTLJSONAdapter modelsOfClass:targetClass fromJSONArray:embeddeDictionary[key] error:nil];
+            else
+                resourcesForKey = @[[MTLJSONAdapter modelOfClass:targetClass fromJSONDictionary:embeddeDictionary[key] error:nil]];
+            
+            for (MTLHALResource *resource in resourcesForKey)
                 [resource setValue:key forKey:@"resourceRelation"];
-            }
             
             [allEmbedded setObject:resourcesForKey forKey:key];
         }
