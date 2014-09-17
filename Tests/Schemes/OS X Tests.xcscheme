@@ -49,7 +49,7 @@
                BlueprintIdentifier = "2902D28B17DF4E2900C81C5A"
                BuildableName = "OS X Tests.xctest"
                BlueprintName = "OS X Tests"
-               ReferencedContainer = "container:AFNetworking Tests.xcodeproj">
+               ReferencedContainer = "container:Mantle-HAL.Tests.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
