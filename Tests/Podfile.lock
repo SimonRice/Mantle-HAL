@@ -1,0 +1,25 @@
+PODS:
+  - Expecta (0.2.4)
+  - Mantle (1.5):
+    - Mantle/extobjc
+  - Mantle-HAL (0.0.1):
+    - Mantle (~> 1.5)
+  - Mantle/extobjc (1.5)
+  - Specta (0.2.1)
+
+DEPENDENCIES:
+  - Expecta (~> 0.2.4)
+  - Mantle-HAL (from `../`)
+  - Specta (~> 0.2.1)
+
+EXTERNAL SOURCES:
+  Mantle-HAL:
+    :path: ../
+
+SPEC CHECKSUMS:
+  Expecta: 112bcafa2304ee0f3c5e586505f24555a47b25d5
+  Mantle: c67a7e45e14196ed42b2a7cbb98ff6a9920e6b92
+  Mantle-HAL: b7c42cd388b3f2df855762064e6394ce3925d38c
+  Specta: 9141310f46b1f68b676650ff2854e1ed0b74163a
+
+COCOAPODS: 0.33.1
