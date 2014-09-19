@@ -1,30 +1,90 @@
 {
-  "_links": {
-    "self": { "href": "/orders" },
-    "next": { "href": "/orders?page=2" },
-    "find": { "href": "/orders{?id}", "templated": true }
-  },
-  "_embedded": {
-    "orders": [{
-        "_links": {
-          "self": { "href": "/orders/123" },
-          "basket": { "href": "/baskets/98712" },
-          "customer": { "href": "/customers/7809" }
+    "_embedded": {
+        "orders": [
+            {
+                "_links": {
+                    "_curies": [
+                        {
+                            "href": "https://pool-99.static.example.org/file/{?href}",
+                            "name": "file-api-root",
+                            "templated": true
+                        }
+                    ],
+                    "api-root:basket": {
+                        "href": "/baskets/98712"
+                    },
+                    "api-root:customer": {
+                        "href": "/customers/7809"
+                    },
+                    "self": {
+                        "href": "/orders/123"
+                    },
+                    "file-api-root:sellHistoryChartImage": {
+                        "href": "/chart/20130314-123.png"
+                    },
+                    "trackAndTrace": {
+                        "href": "https://shippingcompany.com/track/2374981"
+                    }
+                },
+                "currency": "USD",
+                "status": "shipped",
+                "total": 30.0
+            },
+            {
+                "_links": {
+                    "api-root:basket": {
+                        "href": "/baskets/97213"
+                    },
+                    "api-root:customer": {
+                        "href": "/customers/12369"
+                    },
+                    "self": {
+                        "href": "/orders/124"
+                    },
+                    "file-api-root:sellHistoryChartImage": {
+                        "href": "/chart/20130314-124.png"
+                    }
+                },
+                "currency": "USD",
+                "status": "processing",
+                "total": 20.0
+            }
+        ]
+    },
+    "_links": {
+        "_curies": [
+            {
+                "href": "https://api.example.org/{?href}",
+                "name": "api-root",
+                "templated": true
+            },
+            {
+                "href": "https://pool-2.static.example.org/file/{?href}",
+                "name": "file-api-root",
+                "templated": true
+            }
+        ],
+        "api-root:admin": [
+            {
+                "href": "/admins/2",
+                "title": "Fred"
+            },
+            {
+                "href": "/admins/5",
+                "title": "Kate"
+            }
+        ],
+        "api-root:find": {
+            "href": "/orders{?id}",
+            "templated": true
         },
-        "total": 30.00,
-        "currency": "USD",
-        "status": "shipped",
-      },{
-        "_links": {
-          "self": { "href": "/orders/124" },
-          "basket": { "href": "/baskets/97213" },
-          "customer": { "href": "/customers/12369" }
+        "api-root:next": {
+            "href": "/orders?page=2"
         },
-        "total": 20.00,
-        "currency": "USD",
-        "status": "processing"
-    }]
-  },
-  "currentlyProcessing": 14,
-  "shippedToday": 20
+        "self": {
+            "href": "/orders"
+        }
+    },
+    "currentlyProcessing": 14,
+    "shippedToday": 20
 }

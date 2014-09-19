@@ -52,9 +52,9 @@ describe(@"Order List", ^{
     
     it(@"should have its links populated correctly", ^{
         expect([orderList.links[@"self"][0] href]).to.equal(@"/orders");
-        expect([orderList.links[@"next"][0] href]).to.equal(@"/orders?page=2");
-        expect([orderList.links[@"find"][0] href]).to.beginWith(@"/orders");
-        expect([orderList.links[@"find"][0] isTemplated]).to.beTruthy;
+        expect([orderList.links[@"api-root:next"][0] href]).to.equal(@"/orders?page=2");
+        expect([orderList.links[@"api-root:find"][0] href]).to.beginWith(@"/orders");
+        expect([orderList.links[@"api-root:find"][0] isTemplated]).to.beTruthy;
     });
     
     describe(@"First Order", ^{
@@ -77,8 +77,8 @@ describe(@"Order List", ^{
         
         it(@"should have its links populated correctly", ^{
             expect([order.links[@"self"][0] href]).to.equal(@"/orders/123");
-            expect([order.links[@"basket"][0] href]).to.equal(@"/baskets/98712");
-            expect([order.links[@"customer"][0] href]).to.equal(@"/customers/7809");
+            expect([order.links[@"api-root:basket"][0] href]).to.equal(@"/baskets/98712");
+            expect([order.links[@"api-root:customer"][0] href]).to.equal(@"/customers/7809");
         });
     });
     
@@ -102,8 +102,8 @@ describe(@"Order List", ^{
         
         it(@"should have its links populated correctly", ^{
             expect([order.links[@"self"][0] href]).to.equal(@"/orders/124");
-            expect([order.links[@"basket"][0] href]).to.equal(@"/baskets/97213");
-            expect([order.links[@"customer"][0] href]).to.equal(@"/customers/12369");
+            expect([order.links[@"api-root:basket"][0] href]).to.equal(@"/baskets/97213");
+            expect([order.links[@"api-root:customer"][0] href]).to.equal(@"/customers/12369");
         });
     });
 });
