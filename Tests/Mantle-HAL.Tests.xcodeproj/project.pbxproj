@@ -21,6 +21,7 @@
 		F4A3419319CBD30A00DAC2DC /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A3419219CBD30A00DAC2DC /* Order.m */; };
 		F4A3419419CBD30A00DAC2DC /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A3419219CBD30A00DAC2DC /* Order.m */; };
 		F4A3419619CBD3C600DAC2DC /* OrderTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A3419519CBD3C600DAC2DC /* OrderTestCase.m */; };
+		F4A3419719CBDCE400DAC2DC /* OrderTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A3419519CBD3C600DAC2DC /* OrderTestCase.m */; };
 		F4DE770819C963D80040EF30 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DE770719C963D80040EF30 /* Contact.m */; };
 		F4DE770B19C9642E0040EF30 /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DE770A19C9642E0040EF30 /* Address.m */; };
 		F4DE770C19C9642E0040EF30 /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DE770A19C9642E0040EF30 /* Address.m */; };
@@ -462,6 +463,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4A3419719CBDCE400DAC2DC /* OrderTestCase.m in Sources */,
 				F4DE770D19C964320040EF30 /* Contact.m in Sources */,
 				F4A3419419CBD30A00DAC2DC /* Order.m in Sources */,
 				F4DE770C19C9642E0040EF30 /* Address.m in Sources */,
