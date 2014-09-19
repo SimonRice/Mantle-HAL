@@ -24,7 +24,7 @@ describe(@"Contact", ^{
         [MTLHALResource registerClass:Address.class forRelation:@"addr:work"];
         
         NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-        NSString *filePath = [bundle pathForResource:@"contact" ofType:@"json" inDirectory:@"Fixtures"];
+        NSString *filePath = [bundle pathForResource:@"contacts" ofType:@"json" inDirectory:@"Fixtures"];
         NSData* data = [NSData dataWithContentsOfFile:filePath];
         NSDictionary *contactDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         

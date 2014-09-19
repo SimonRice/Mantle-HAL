@@ -16,6 +16,11 @@
 		2902D29517DF4E2A00C81C5A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2902D29317DF4E2A00C81C5A /* InfoPlist.strings */; };
 		3D56634E3A564CEE86172413 /* libPods-osx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96A923755B00464187DEDBAF /* libPods-osx.a */; };
 		6D86BAA5C6174E98AE719CE9 /* libPods-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E73C267F33406A9F92476C /* libPods-ios.a */; };
+		F4A3418F19CBD2C400DAC2DC /* OrderList.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A3418E19CBD2C400DAC2DC /* OrderList.m */; };
+		F4A3419019CBD2C400DAC2DC /* OrderList.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A3418E19CBD2C400DAC2DC /* OrderList.m */; };
+		F4A3419319CBD30A00DAC2DC /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A3419219CBD30A00DAC2DC /* Order.m */; };
+		F4A3419419CBD30A00DAC2DC /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A3419219CBD30A00DAC2DC /* Order.m */; };
+		F4A3419619CBD3C600DAC2DC /* OrderTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A3419519CBD3C600DAC2DC /* OrderTestCase.m */; };
 		F4DE770819C963D80040EF30 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DE770719C963D80040EF30 /* Contact.m */; };
 		F4DE770B19C9642E0040EF30 /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DE770A19C9642E0040EF30 /* Address.m */; };
 		F4DE770C19C9642E0040EF30 /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DE770A19C9642E0040EF30 /* Address.m */; };
@@ -63,6 +68,11 @@
 		A74DA00618D2FB9400F3B969 /* AltName.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = AltName.cer; sourceTree = "<group>"; };
 		A74DA00718D2FB9400F3B969 /* foobar.com.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = foobar.com.cer; sourceTree = "<group>"; };
 		A74DA00818D2FB9400F3B969 /* NoDomains.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = NoDomains.cer; sourceTree = "<group>"; };
+		F4A3418D19CBD2C400DAC2DC /* OrderList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderList.h; path = Classes/OrderList.h; sourceTree = "<group>"; };
+		F4A3418E19CBD2C400DAC2DC /* OrderList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderList.m; path = Classes/OrderList.m; sourceTree = "<group>"; };
+		F4A3419119CBD30A00DAC2DC /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Order.h; path = Classes/Order.h; sourceTree = "<group>"; };
+		F4A3419219CBD30A00DAC2DC /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Order.m; path = Classes/Order.m; sourceTree = "<group>"; };
+		F4A3419519CBD3C600DAC2DC /* OrderTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTestCase.m; sourceTree = "<group>"; };
 		F4DE770619C963D80040EF30 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Contact.h; path = Classes/Contact.h; sourceTree = "<group>"; };
 		F4DE770719C963D80040EF30 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Contact.m; path = Classes/Contact.m; sourceTree = "<group>"; };
 		F4DE770919C9642E0040EF30 /* Address.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Address.h; path = Classes/Address.h; sourceTree = "<group>"; };
@@ -102,7 +112,7 @@
 			children = (
 				25801549173EB4B40026AA6E /* Pods-ios.xcconfig */,
 				2580154A173EB4B40026AA6E /* Pods-osx.xcconfig */,
-				F4DE770519C963AE0040EF30 /* Classes */,
+				F4DE770519C963AE0040EF30 /* Test Classes */,
 				25A753091747FC7E00F04F2F /* Resources */,
 				29B9ED6017DF4D350021E4D5 /* Tests */,
 				2902D27C17DF4E1200C81C5A /* iOS Tests */,
@@ -204,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				F4DE770E19C9646A0040EF30 /* ContactTestCase.m */,
+				F4A3419519CBD3C600DAC2DC /* OrderTestCase.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -240,7 +251,7 @@
 			path = Resources/SelfSigned;
 			sourceTree = "<group>";
 		};
-		F4DE770519C963AE0040EF30 /* Classes */ = {
+		F4A3418B19CBD2A700DAC2DC /* Contact */ = {
 			isa = PBXGroup;
 			children = (
 				F4DE770619C963D80040EF30 /* Contact.h */,
@@ -248,7 +259,27 @@
 				F4DE770919C9642E0040EF30 /* Address.h */,
 				F4DE770A19C9642E0040EF30 /* Address.m */,
 			);
-			name = Classes;
+			name = Contact;
+			sourceTree = "<group>";
+		};
+		F4A3418C19CBD2AE00DAC2DC /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				F4A3418D19CBD2C400DAC2DC /* OrderList.h */,
+				F4A3418E19CBD2C400DAC2DC /* OrderList.m */,
+				F4A3419119CBD30A00DAC2DC /* Order.h */,
+				F4A3419219CBD30A00DAC2DC /* Order.m */,
+			);
+			name = Order;
+			sourceTree = "<group>";
+		};
+		F4DE770519C963AE0040EF30 /* Test Classes */ = {
+			isa = PBXGroup;
+			children = (
+				F4A3418C19CBD2AE00DAC2DC /* Order */,
+				F4A3418B19CBD2A700DAC2DC /* Contact */,
+			);
+			name = "Test Classes";
 			sourceTree = "<group>";
 		};
 		F8E801E9175AC34D008D3886 /* Certificates */ = {
@@ -418,8 +449,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4A3419619CBD3C600DAC2DC /* OrderTestCase.m in Sources */,
 				F4DE770B19C9642E0040EF30 /* Address.m in Sources */,
+				F4A3419319CBD30A00DAC2DC /* Order.m in Sources */,
 				F4DE770819C963D80040EF30 /* Contact.m in Sources */,
+				F4A3418F19CBD2C400DAC2DC /* OrderList.m in Sources */,
 				F4DE770F19C9646A0040EF30 /* ContactTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -429,7 +463,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4DE770D19C964320040EF30 /* Contact.m in Sources */,
+				F4A3419419CBD30A00DAC2DC /* Order.m in Sources */,
 				F4DE770C19C9642E0040EF30 /* Address.m in Sources */,
+				F4A3419019CBD2C400DAC2DC /* OrderList.m in Sources */,
 				F4DE771319C969240040EF30 /* ContactTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
