@@ -21,7 +21,7 @@ describe(@"Order List", ^{
     __block NSArray *orders = nil;
     
     beforeAll(^{
-        [MTLHALResource registerClass:Order.class forRelation:@"orders"];
+        [MTLHALResource registerClass:Order.class forRelation:@"ea:order"];
         
         NSBundle *bundle = [NSBundle bundleForClass:[self class]];
         NSString *filePath = [bundle pathForResource:@"orders" ofType:@"json" inDirectory:@"Fixtures"];
@@ -32,7 +32,7 @@ describe(@"Order List", ^{
                               fromJSONDictionary:orderListDictionary
                                            error:nil];
         
-        orders = [orderList resourcesForRelation:@"orders"];
+        orders = orderList.orders;
     });
     
     it(@"should be an order list", ^{
@@ -52,16 +52,16 @@ describe(@"Order List", ^{
     
     it(@"should have its links populated correctly", ^{
         expect([orderList.links[@"self"][0] href]).to.equal(@"/orders");
-        expect([orderList.links[@"api-root:next"][0] href]).to.equal(@"/orders?page=2");
-        expect([orderList.links[@"api-root:find"][0] href]).to.beginWith(@"/orders");
-        expect([orderList.links[@"api-root:find"][0] isTemplated]).to.beTruthy;
+        expect([orderList.links[@"next"][0] href]).to.equal(@"/orders?page=2");
+        expect([orderList.links[@"ea:find"][0] href]).to.beginWith(@"/orders");
+        expect([orderList.links[@"ea:find"][0] isTemplated]).to.beTruthy;
     });
     
     describe(@"First Order", ^{
         __block Order *order = nil;
         
         beforeAll(^{
-            order = orderList.orders[0];
+            order = orders[0];
         });
         
         it(@"should be an order", ^{
@@ -77,8 +77,8 @@ describe(@"Order List", ^{
         
         it(@"should have its links populated correctly", ^{
             expect([order.links[@"self"][0] href]).to.equal(@"/orders/123");
-            expect([order.links[@"api-root:basket"][0] href]).to.equal(@"/baskets/98712");
-            expect([order.links[@"api-root:customer"][0] href]).to.equal(@"/customers/7809");
+            expect([order.links[@"ea:basket"][0] href]).to.equal(@"/baskets/98712");
+            expect([order.links[@"ea:customer"][0] href]).to.equal(@"/customers/7809");
         });
     });
     
@@ -86,7 +86,7 @@ describe(@"Order List", ^{
         __block Order *order = nil;
         
         beforeAll(^{
-            order = orderList.orders[1];
+            order = orders[1];
         });
         
         it(@"should be an order", ^{
@@ -102,8 +102,8 @@ describe(@"Order List", ^{
         
         it(@"should have its links populated correctly", ^{
             expect([order.links[@"self"][0] href]).to.equal(@"/orders/124");
-            expect([order.links[@"api-root:basket"][0] href]).to.equal(@"/baskets/97213");
-            expect([order.links[@"api-root:customer"][0] href]).to.equal(@"/customers/12369");
+            expect([order.links[@"ea:basket"][0] href]).to.equal(@"/baskets/97213");
+            expect([order.links[@"ea:customer"][0] href]).to.equal(@"/customers/12369");
         });
     });
 });

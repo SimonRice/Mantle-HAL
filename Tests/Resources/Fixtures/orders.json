@@ -1,29 +1,16 @@
 {
     "_embedded": {
-        "orders": [
+        "ea:order": [
             {
                 "_links": {
-                    "_curies": [
-                        {
-                            "href": "https://pool-99.static.example.org/file/{?href}",
-                            "name": "file-api-root",
-                            "templated": true
-                        }
-                    ],
-                    "api-root:basket": {
+                    "ea:basket": {
                         "href": "/baskets/98712"
                     },
-                    "api-root:customer": {
+                    "ea:customer": {
                         "href": "/customers/7809"
                     },
                     "self": {
                         "href": "/orders/123"
-                    },
-                    "file-api-root:sellHistoryChartImage": {
-                        "href": "/chart/20130314-123.png"
-                    },
-                    "trackAndTrace": {
-                        "href": "https://shippingcompany.com/track/2374981"
                     }
                 },
                 "currency": "USD",
@@ -32,17 +19,14 @@
             },
             {
                 "_links": {
-                    "api-root:basket": {
+                    "ea:basket": {
                         "href": "/baskets/97213"
                     },
-                    "api-root:customer": {
+                    "ea:customer": {
                         "href": "/customers/12369"
                     },
                     "self": {
                         "href": "/orders/124"
-                    },
-                    "file-api-root:sellHistoryChartImage": {
-                        "href": "/chart/20130314-124.png"
                     }
                 },
                 "currency": "USD",
@@ -52,19 +36,14 @@
         ]
     },
     "_links": {
-        "_curies": [
+        "curies": [
             {
-                "href": "https://api.example.org/{?href}",
-                "name": "api-root",
-                "templated": true
-            },
-            {
-                "href": "https://pool-2.static.example.org/file/{?href}",
-                "name": "file-api-root",
+                "href": "http://example.com/docs/rels/{rel}",
+                "name": "ea",
                 "templated": true
             }
         ],
-        "api-root:admin": [
+        "ea:admin": [
             {
                 "href": "/admins/2",
                 "title": "Fred"
@@ -74,11 +53,11 @@
                 "title": "Kate"
             }
         ],
-        "api-root:find": {
+        "ea:find": {
             "href": "/orders{?id}",
             "templated": true
         },
-        "api-root:next": {
+        "next": {
             "href": "/orders?page=2"
         },
         "self": {

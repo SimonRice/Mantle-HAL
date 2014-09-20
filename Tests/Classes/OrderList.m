@@ -11,7 +11,7 @@
 @implementation OrderList
 
 - (NSArray *)orders {
-    return [self resourcesForRelation:@"orders"];
+    return [self resourcesForRelation:@"ea:order"];
 }
 
 @end

@@ -24,7 +24,7 @@
 
 @interface MTLHALResource()
 
-@property (nonatomic, strong, readonly) NSDictionary *curies;
+@property (nonatomic, strong, readonly) NSArray *curies;
 @property (nonatomic, strong, readonly) NSDictionary *embedded;
 
 @end
@@ -124,12 +124,15 @@ static NSMutableDictionary *p_classesForRelations;
     NSMutableArray *resources = [NSMutableArray array];
     
     for (MTLHALResource *resource in self.embedded[relation]) {
-        NSMutableDictionary *resourceCuries = [[resource valueForKey:@"curies"] mutableCopy];
+        NSMutableArray *resourceCuries = [[resource valueForKey:@"curies"] mutableCopy];
         
-        if (resourceCuries) {
-            for (NSString *key in self.curies.allKeys) {
-                if (![resourceCuries.allKeys containsObject:key])
-                    [resourceCuries setObject:self.curies[key] forKey:key];
+        if (resourceCuries && resourceCuries.count > 0) {
+            for (MTLHALLink *curie in self.curies) {
+                MTLHALLink *resourceCurie = [resourceCuries filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"name = %@", curie.name]].firstObject;
+                
+                if (!resourceCurie) {
+                    [resourceCuries addObject:curie];
+                }
             }
         } else
             resourceCuries = self.curies.mutableCopy;
