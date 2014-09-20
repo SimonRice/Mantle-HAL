@@ -128,7 +128,7 @@ static NSMutableDictionary *p_classesForRelations;
         
         if (resourceCuries && resourceCuries.count > 0) {
             for (MTLHALLink *curie in self.curies) {
-                MTLHALLink *resourceCurie = [resourceCuries filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"name = %@", curie.name]].firstObject;
+                MTLHALLink *resourceCurie = [resourceCuries filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"name == %@", curie.name]].firstObject;
                 
                 if (!resourceCurie) {
                     [resourceCuries addObject:curie];

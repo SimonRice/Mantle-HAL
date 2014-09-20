@@ -17,7 +17,7 @@
 SpecBegin(Order)
 
 describe(@"Order List", ^{
-    __block OrderList *orderList = nil;
+    __block OrderList *list = nil;
     __block NSArray *orders = nil;
     
     beforeAll(^{
@@ -26,35 +26,43 @@ describe(@"Order List", ^{
         NSBundle *bundle = [NSBundle bundleForClass:[self class]];
         NSString *filePath = [bundle pathForResource:@"orders" ofType:@"json" inDirectory:@"Fixtures"];
         NSData* data = [NSData dataWithContentsOfFile:filePath];
-        NSDictionary *orderListDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        NSDictionary *listDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         
-        orderList = [MTLJSONAdapter modelOfClass:OrderList.class
-                              fromJSONDictionary:orderListDictionary
-                                           error:nil];
+        list = [MTLJSONAdapter modelOfClass:OrderList.class
+                         fromJSONDictionary:listDictionary
+                                      error:nil];
         
-        orders = orderList.orders;
+        orders = list.orders;
     });
     
     it(@"should be an order list", ^{
-        expect(orderList).toNot.beNil;
-        expect(orderList).to.beKindOf(OrderList.class);
+        expect(list).toNot.beNil;
+        expect(list).to.beKindOf(list.class);
     });
     
     it(@"should have 2 orders", ^{
-        expect(orderList).toNot.beNil;
-        expect(orderList).to.beKindOf(OrderList.class);
+        expect(list).toNot.beNil;
+        expect(list).to.beKindOf(list.class);
     });
     
     it(@"should have its own fields populated correctly", ^{
-        expect(orderList.currentlyProcessing).to.equal(14);
-        expect(orderList.shippedToday).to.equal(20);
+        expect(list.currentlyProcessing).to.equal(14);
+        expect(list.shippedToday).to.equal(20);
     });
     
     it(@"should have its links populated correctly", ^{
-        expect([orderList.links[@"self"][0] href]).to.equal(@"/orders");
-        expect([orderList.links[@"next"][0] href]).to.equal(@"/orders?page=2");
-        expect([orderList.links[@"ea:find"][0] href]).to.beginWith(@"/orders");
-        expect([orderList.links[@"ea:find"][0] isTemplated]).to.beTruthy;
+        expect([list.links[@"self"][0] href]).to.equal(@"/orders");
+        expect([list.links[@"next"][0] href]).to.equal(@"/orders?page=2");
+        expect([list.links[@"ea:find"][0] href]).to.beginWith(@"/orders");
+        expect([list.links[@"ea:find"][0] isTemplated]).to.beTruthy;
+    });
+    
+    it(@"should have its curies set up correctly", ^{
+        expect([list extendedHrefForRelation:@"ea:order"]).to.equal(@"http://example.com/docs/rels/order");
+        expect([list extendedHrefForRelation:@"ea:find"]).to.equal(@"http://example.com/docs/rels/find");
+        expect([list extendedHrefForRelation:@"ea:admin"]).to.equal(@"http://example.com/docs/rels/admin");
+        expect([list extendedHrefForRelation:@"ea:basket"]).to.equal(@"http://example.com/docs/rels/basket");
+        expect([list extendedHrefForRelation:@"ea:customer"]).to.equal(@"http://example.com/docs/rels/customer");
     });
     
     describe(@"First Order", ^{
@@ -79,6 +87,14 @@ describe(@"Order List", ^{
             expect([order.links[@"self"][0] href]).to.equal(@"/orders/123");
             expect([order.links[@"ea:basket"][0] href]).to.equal(@"/baskets/98712");
             expect([order.links[@"ea:customer"][0] href]).to.equal(@"/customers/7809");
+        });
+        
+        it(@"should have its overriding curies set up correctly", ^{
+            expect([order extendedHrefForRelation:@"ea:order"]).to.equal(@"http://alt-example.com/docs/rels/order");
+            expect([order extendedHrefForRelation:@"ea:find"]).to.equal(@"http://alt-example.com/docs/rels/find");
+            expect([order extendedHrefForRelation:@"ea:admin"]).to.equal(@"http://alt-example.com/docs/rels/admin");
+            expect([order extendedHrefForRelation:@"ea:basket"]).to.equal(@"http://alt-example.com/docs/rels/basket");
+            expect([order extendedHrefForRelation:@"ea:customer"]).to.equal(@"http://alt-example.com/docs/rels/customer");
         });
     });
     

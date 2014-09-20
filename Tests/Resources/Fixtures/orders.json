@@ -3,6 +3,13 @@
         "ea:order": [
             {
                 "_links": {
+                    "curies": [
+                        {
+                            "href": "http://alt-example.com/docs/rels/{rel}",
+                            "name": "ea",
+                            "templated": true
+                        }
+                    ],
                     "ea:basket": {
                         "href": "/baskets/98712"
                     },
