@@ -156,4 +156,11 @@ static NSMutableDictionary *p_classesForRelations;
         [p_classesForRelations setValue:class forKey:relation];
 }
 
++ (void)registerClassesForRelations:(NSDictionary *)classesForRelations
+{
+    for (NSString *relation in classesForRelations.allKeys) {
+        [self registerClass:classesForRelations[relation] forRelation:relation];
+    }
+}
+
 @end

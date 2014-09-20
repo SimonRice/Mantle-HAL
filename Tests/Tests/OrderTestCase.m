@@ -57,7 +57,7 @@ describe(@"Order List", ^{
         expect([list.links[@"ea:find"][0] isTemplated]).to.beTruthy;
     });
     
-    it(@"should have its curies set up correctly", ^{
+    it(@"should have its documentation URL expanded correctly", ^{
         expect([list extendedHrefForRelation:@"ea:order"]).to.equal(@"http://example.com/docs/rels/order");
         expect([list extendedHrefForRelation:@"ea:find"]).to.equal(@"http://example.com/docs/rels/find");
         expect([list extendedHrefForRelation:@"ea:admin"]).to.equal(@"http://example.com/docs/rels/admin");
@@ -89,7 +89,7 @@ describe(@"Order List", ^{
             expect([order.links[@"ea:customer"][0] href]).to.equal(@"/customers/7809");
         });
         
-        it(@"should have its overriding curies set up correctly", ^{
+        it(@"should have its overriding documentation URL expanded correctly", ^{
             expect([order extendedHrefForRelation:@"ea:order"]).to.equal(@"http://alt-example.com/docs/rels/order");
             expect([order extendedHrefForRelation:@"ea:find"]).to.equal(@"http://alt-example.com/docs/rels/find");
             expect([order extendedHrefForRelation:@"ea:admin"]).to.equal(@"http://alt-example.com/docs/rels/admin");

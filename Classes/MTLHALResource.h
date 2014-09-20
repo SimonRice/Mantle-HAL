@@ -74,4 +74,15 @@
  */
 + (void)registerClass:(__unsafe_unretained Class)class forRelation:(NSString *)relation;
 
+
+/**
+ *  Assigns relation keys to corresponding classes.  This means all embedded
+ *  objects in a particular relation for all resources will automatically be
+ *  serialised to this class.
+ *
+ *  @param classesForRelations Dictionary containing the class (value) to assign
+ *  the relation (key) to.
+ */
++ (void)registerClassesForRelations:(NSDictionary *)classesForRelations;
+
 @end
