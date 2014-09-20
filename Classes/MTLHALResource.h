@@ -70,9 +70,9 @@
  *  serialised to this class.
  *
  *  @param relation The relation key to assign
- *  @param class The class to assign the relation to.
+ *  @param targetClass The class to assign the relation to.
  */
-+ (void)registerClass:(__unsafe_unretained Class)class forRelation:(NSString *)relation;
++ (void)registerClass:(__unsafe_unretained Class)targetClass forRelation:(NSString *)relation;
 
 
 /**

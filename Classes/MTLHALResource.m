@@ -148,12 +148,12 @@ static NSMutableDictionary *p_classesForRelations;
     return [self resourcesForRelation:relation][0];
 }
 
-+ (void)registerClass:(__unsafe_unretained Class)class forRelation:(NSString *)relation
++ (void)registerClass:(__unsafe_unretained Class)targetClass forRelation:(NSString *)relation
 {
     if (!p_classesForRelations)
-        p_classesForRelations = [[NSMutableDictionary alloc] initWithObjects:@[class] forKeys:@[relation]];
+        p_classesForRelations = [[NSMutableDictionary alloc] initWithObjects:@[targetClass] forKeys:@[relation]];
     else
-        [p_classesForRelations setValue:class forKey:relation];
+        [p_classesForRelations setValue:targetClass forKey:relation];
 }
 
 + (void)registerClassesForRelations:(NSDictionary *)classesForRelations

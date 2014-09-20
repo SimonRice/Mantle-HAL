@@ -21,7 +21,7 @@ describe(@"Order List", ^{
     __block NSArray *orders = nil;
     
     beforeAll(^{
-        [MTLHALResource registerClass:Order.class forRelation:@"ea:order"];
+        [MTLHALResource registerClassesForRelations:@{ @"ea:order" : Order.class }];
         
         NSBundle *bundle = [NSBundle bundleForClass:[self class]];
         NSString *filePath = [bundle pathForResource:@"orders" ofType:@"json" inDirectory:@"Fixtures"];
