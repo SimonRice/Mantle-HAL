@@ -42,10 +42,10 @@ static NSMutableDictionary *p_classesForRelations;
 }
 
 + (NSValueTransformer *)curiesJSONTransformer {
-    // Other way dealt with in links transformer
-    
-    return [MTLValueTransformer transformerWithBlock:^(NSArray *curieArray) {
+    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSArray *curieArray) {
         return [MTLJSONAdapter modelsOfClass:MTLHALLink.class fromJSONArray:curieArray error:nil];
+    } reverseBlock:^id(NSArray *curies) {
+        return [MTLJSONAdapter JSONArrayFromModels:curies];
     }];
 }
 
