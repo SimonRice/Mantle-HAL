@@ -42,34 +42,53 @@ static NSMutableDictionary *p_classesForRelations;
 }
 
 + (NSValueTransformer *)curiesJSONTransformer {
+    // Other way dealt with in links transformer
+    
     return [MTLValueTransformer transformerWithBlock:^(NSArray *curieArray) {
         return [MTLJSONAdapter modelsOfClass:MTLHALLink.class fromJSONArray:curieArray error:nil];
     }];
 }
 
 + (NSValueTransformer *)linksJSONTransformer {
-    return [MTLValueTransformer transformerWithBlock:^id(NSDictionary *links) {
-        NSMutableDictionary *allLinks = [NSMutableDictionary dictionary];
+    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSDictionary *linksDictionary) {
+        NSMutableDictionary *links = [NSMutableDictionary dictionary];
         
-        for (NSString *key in links.allKeys) {
+        for (NSString *key in linksDictionary.allKeys) {
             if (![@[@"curie", @"curies"] containsObject:key]) {
                 NSArray *linksForKey = @[];
                 
-                if ([links[key] isKindOfClass:NSArray.class])
-                    linksForKey = [MTLJSONAdapter modelsOfClass:MTLHALLink.class fromJSONArray:links[key] error:nil];
-                else
-                    linksForKey = @[[MTLJSONAdapter modelOfClass:MTLHALLink.class fromJSONDictionary:links[key] error:nil]];
-                
-                [allLinks setObject:linksForKey forKey:key];
+                if ([linksDictionary[key] isKindOfClass:NSArray.class]) {
+                    linksForKey = [MTLJSONAdapter modelsOfClass:MTLHALLink.class fromJSONArray:linksDictionary[key] error:nil];
+                } else {
+                    linksForKey = @[[MTLJSONAdapter modelOfClass:MTLHALLink.class fromJSONDictionary:linksDictionary[key] error:nil]];
+                }
+                    
+                [links setObject:linksForKey forKey:key];
             }
         }
         
-        return allLinks;
+        return links;
+    } reverseBlock:^id(NSDictionary *links) {
+        NSMutableDictionary *linksDictionary = [NSMutableDictionary dictionary];
+        
+        for (NSString *key in links.allKeys) {
+            id linksForKey = nil;
+            if ([links[key] count] > 1) {
+                linksForKey = [MTLJSONAdapter JSONArrayFromModels:links[key]];
+            } else {
+                linksForKey = [MTLJSONAdapter JSONDictionaryFromModel:links[key][0]];
+            }
+            [linksDictionary setObject:linksForKey forKey:key];
+        }
+        
+        return linksDictionary;
     }];
 }
 
 + (NSValueTransformer *)embeddedJSONTransformer {
-    return [MTLValueTransformer transformerWithBlock:^id(NSDictionary *embeddeDictionary) {
+    // TODO: Make this reversible
+    
+    return [MTLValueTransformer transformerWithBlock:^(NSDictionary *embeddeDictionary) {
         NSMutableDictionary *allEmbedded = [NSMutableDictionary dictionary];
         
         for (NSString *key in embeddeDictionary.allKeys) {

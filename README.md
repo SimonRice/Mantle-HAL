@@ -3,4 +3,88 @@ Mantle-HAL
 
 [![Build Status](https://travis-ci.org/simonrice/Mantle-HAL.png)](https://travis-ci.org/simonrice/Mantle-HAL) 
 
-HAL Parser for Objective-C with added strong typing
+Mantle-HAL is a [HAL](http://stateless.co/hal_specification.html) parser for Objective-C.  Unlike other HAL parsers, it sets up strongly typed resources and links for you!
+
+Mantle-HAL is based on [Mantle](https://github.com/Mantle/Mantle), a popular JSON model parser that's easy to use and is written and maintained by GitHub!  Like Mantle, Mantle-HAL automatically provides implementations for `<NSCoding>`, `<NSCopying>`, `-isEqual:`, and `-hash`.  If you can use Mantle, you can use Mantle-HAL!
+
+With Mantle-HAL, you can use any http library you wish to use, if any!  The only dependency is Mantle itself.
+
+Getting Started
+---------------
+
+The easiest way by far of including Mantle-HAL in your project is to use [CocoaPods](http://cocoapods.org).  Once you've got that up & running for your project, simply add the dependency to your `Podfile`:
+
+```ruby
+ # Your platform here
+
+ pod "Mantle-HAL"
+
+```
+
+Then run `pod install` to install the dependencies and use the `xcworkspace` from here on.
+
+Resources
+---------
+
+At the heart of HAL are resources.  `MTLHALResource` is the base class for all resources in Mantle-HAL.  It contains a dictionary of links, and two further functions to access any embedded resources:
+
+* `- (MTLHALResource *)resourceForRelation:`
+* `- (NSArray *)resourcesForRelation:`
+
+Where `relation` is a string containing the key of the embedded relation, as specified in your JSON.
+
+Your resources should subclass `MTLHALResource` and provide your own properties.  
+
+For example, an `Address` resource may look like this:
+
+```
+ #import <Mantle-HAL/MTLHALResource.h>
+
+ @interface Address : MTLHALResource
+
+ @property (nonatomic, strong) NSString *street;
+ @property (nonatomic, strong) NSString *city;
+ @property (nonatomic, strong) NSString *state;
+ 
+ @end
+```
+
+Now this resource may come from an NSDictionary object representing JSON data.  Converting this dictionary to an address is exactly the same as in Mantle:
+
+```
+Address *address = [MTLJSONAdapter modelOfClass:Address.class fromJSONDictionary:addressJSONDictionary error:&error];
+```
+
+Now resources can be embedded within different resources.  However, Mantle-HAL allows these embedded resources to be strongly typed as well.  Before converting any HAL resources (e.g., in your App Delegate), you should register your classes to the relevant relations - this is done via `MTLHALResource`'s class method `- registerClass: forRelation:`.  For example, say your resource can have `addr:work` and `addr:home`, both representing Address objects:
+
+```
+[MTLHALResource registerClass:Address.class forRelation:@"addr:home"];
+[MTLHALResource registerClass:Address.class forRelation:@"addr:work"];
+```
+
+Now whenever you fetch an embedded resource with either of these relations, you will get address objects!
+
+Links
+-----
+
+HAL resources can contain any number of links.  `MTLHALResource` provides a dictionary called `links`.  The key represents the name of the link and the value is an array of `MTLHALLink` objects.  `MTLHALLink` is an object used to represent a link and fully conforms to the links section of the HAL specification.
+
+CURIEs
+------
+
+Should you need them, CURIEs are fully supported in Mantle-HAL.  They can be passed down to embedded resources or be overrided.  To get at the CURIE URL for a particular relation, `MTLHALResource` provides `- extendedHrefForRelation:`, which returns the URL containing information about a relation.
+
+Swift Support
+-------------
+
+Mantle currently doesn't work with Swift objects, so you'll have to write your resources in Objective-C for the time being.  However, you can use all of your resources from Swift provided they have been included in your bridging header.
+
+Contributions
+-------------
+
+As everyone says, GitHub is about social coding - I didn't just choose to use it because of my love of git as a version control system.  Please do chip in & help make this an even better project, or even file in an issue if you see anything not working right.
+
+License
+-------
+
+As stated further up on this page, usage is provided under the [MIT License](http://opensource.org/licenses/mit-license.php).  See the `LICENSE` file or any class header for the full details.
