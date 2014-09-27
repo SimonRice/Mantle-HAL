@@ -86,22 +86,20 @@ static NSMutableDictionary *p_classesForRelations;
 }
 
 + (NSValueTransformer *)embeddedJSONTransformer {
-    // TODO: Make this reversible
-    
-    return [MTLValueTransformer transformerWithBlock:^(NSDictionary *embeddeDictionary) {
+    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSDictionary *embeddedDictionary) {
         NSMutableDictionary *allEmbedded = [NSMutableDictionary dictionary];
         
-        for (NSString *key in embeddeDictionary.allKeys) {
+        for (NSString *key in embeddedDictionary.allKeys) {
             __unsafe_unretained Class targetClass = p_classesForRelations[key];
             if (!targetClass)
                 targetClass = MTLHALResource.class;
             
             NSArray *resourcesForKey = nil;
             
-            if ([embeddeDictionary[key] isKindOfClass:NSArray.class])
-                resourcesForKey = [MTLJSONAdapter modelsOfClass:targetClass fromJSONArray:embeddeDictionary[key] error:nil];
+            if ([embeddedDictionary[key] isKindOfClass:NSArray.class])
+                resourcesForKey = [MTLJSONAdapter modelsOfClass:targetClass fromJSONArray:embeddedDictionary[key] error:nil];
             else
-                resourcesForKey = @[[MTLJSONAdapter modelOfClass:targetClass fromJSONDictionary:embeddeDictionary[key] error:nil]];
+                resourcesForKey = @[[MTLJSONAdapter modelOfClass:targetClass fromJSONDictionary:embeddedDictionary[key] error:nil]];
             
             for (MTLHALResource *resource in resourcesForKey)
                 [resource setValue:key forKey:@"resourceRelation"];
@@ -110,6 +108,21 @@ static NSMutableDictionary *p_classesForRelations;
         }
         
         return allEmbedded;
+    } reverseBlock:^id(NSDictionary *embedded) {
+        NSMutableDictionary *embeddedDictionary = [NSMutableDictionary dictionary];
+        
+        for (NSString *key in embedded.allKeys) {
+            id resourcesForKey = nil;
+            
+            if ([embedded[key] count] == 1)
+                resourcesForKey = [MTLJSONAdapter JSONDictionaryFromModel:embedded[key][0]];
+            else
+                resourcesForKey = [MTLJSONAdapter JSONArrayFromModels:embedded[key]];
+            
+            [embeddedDictionary setObject:resourcesForKey forKey:key];
+        }
+        
+        return embeddedDictionary;
     }];
 }
 
