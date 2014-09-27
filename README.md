@@ -57,6 +57,8 @@ Now resources can be embedded within different resources.  However, Mantle-HAL a
 
 Now whenever you fetch an embedded resource with either of these relations, you will get address objects!
 
+One final important point - if your resource uses `+ JSONKeyPathsByPropertyKey` at all, make sure you include the results of `[super JSONKeyPathsByPropertyKey]` in the dictionary returned - otherwise your links and embedded resources will not be included in your resource.
+
 Links
 -----
 
