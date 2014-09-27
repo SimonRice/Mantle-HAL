@@ -2,6 +2,8 @@ Mantle-HAL
 ==========
 
 [![Build Status](https://travis-ci.org/simonrice/Mantle-HAL.png)](https://travis-ci.org/simonrice/Mantle-HAL) 
+[![CocoaPods Platform](https://cocoapod-badges.herokuapp.com/p/Mantle-HAL/badge.png)](http://cocoadocs.org/docsets/Mantle-HAL) 
+[![CocoaPods Version](https://cocoapod-badges.herokuapp.com/v/Mantle-HAL/badge.png)](http://cocoadocs.org/docsets/Mantle-HAL) 
 
 Mantle-HAL is a [HAL](http://stateless.co/hal_specification.html) parser for Objective-C.  Unlike other HAL parsers, it sets up strongly typed resources and links for you!
 
