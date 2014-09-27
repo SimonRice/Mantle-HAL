@@ -1,11 +1,3 @@
-//
-//  Order.h
-//  Mantle-HAL.Tests
-//
-//  Created by Simon Rice on 19/09/2014.
-//  Copyright (c) 2014 Simon Rice. All rights reserved.
-//
-
 #import "MTLHALResource.h"
 
 @interface Order : MTLHALResource
