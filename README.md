@@ -7,9 +7,9 @@ Mantle-HAL
 
 Mantle-HAL is a [HAL](http://stateless.co/hal_specification.html) parser for Objective-C.  Unlike other HAL parsers, it sets up strongly typed resources and links for you!
 
-Mantle-HAL is based on [Mantle](https://github.com/Mantle/Mantle), a popular JSON model parser that's easy to use and is written and maintained by GitHub!  Like Mantle, Mantle-HAL automatically provides implementations for `<NSCoding>`, `<NSCopying>`, `-isEqual:`, and `-hash`.  If you can use Mantle, you can use Mantle-HAL!
+Mantle-HAL runs on top of [Mantle](https://github.com/Mantle/Mantle), a popular JSON model parser that's easy to use and is written and maintained by GitHub!  Like Mantle, Mantle-HAL automatically provides implementations for `<NSCoding>`, `<NSCopying>`, `-isEqual:`, and `-hash`.  If you can use Mantle, you can use Mantle-HAL!
 
-With Mantle-HAL, you can use any http library you wish to use, if any!  The only dependency is Mantle itself.
+With Mantle-HAL, you can use any http library you wish to use, if any!  The only dependency is Mantle itself.  As a disclaimer, I must state this is an unofficial extension to Mantle itself!
 
 Getting Started
 ---------------
