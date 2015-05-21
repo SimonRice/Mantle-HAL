@@ -100,7 +100,7 @@ static NSMutableDictionary *p_classesForRelations;
                 
                 resourcesForKey = [MTLJSONAdapter modelsOfClass:targetClass fromJSONArray:embeddedDictionary[key] error:nil];
             }
-            else if (resourcesForKey = [MTLJSONAdapter modelOfClass:targetClass fromJSONDictionary:embeddedDictionary[key] error:nil]) {
+            else if ([MTLJSONAdapter modelOfClass:targetClass fromJSONDictionary:embeddedDictionary[key] error:nil]) {
                 
                 resourcesForKey = @[[MTLJSONAdapter modelOfClass:targetClass fromJSONDictionary:embeddedDictionary[key] error:nil]];
             }
