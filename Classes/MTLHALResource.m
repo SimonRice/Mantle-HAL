@@ -96,15 +96,23 @@ static NSMutableDictionary *p_classesForRelations;
             
             NSArray *resourcesForKey = nil;
             
-            if ([embeddedDictionary[key] isKindOfClass:NSArray.class])
+            if ([embeddedDictionary[key] isKindOfClass:NSArray.class]) {
+                
                 resourcesForKey = [MTLJSONAdapter modelsOfClass:targetClass fromJSONArray:embeddedDictionary[key] error:nil];
-            else
+            }
+            else if (resourcesForKey = @[[MTLJSONAdapter modelOfClass:targetClass fromJSONDictionary:embeddedDictionary[key] error:nil]]) {
+                
                 resourcesForKey = @[[MTLJSONAdapter modelOfClass:targetClass fromJSONDictionary:embeddedDictionary[key] error:nil]];
+            }
             
-            for (MTLHALResource *resource in resourcesForKey)
-                [resource setValue:key forKey:@"resourceRelation"];
-            
-            [allEmbedded setObject:resourcesForKey forKey:key];
+            if (resourcesForKey) {
+                
+                for (MTLHALResource *resource in resourcesForKey) {
+                    
+                    [resource setValue:key forKey:@"resourceRelation"];
+                }
+                [allEmbedded setObject:resourcesForKey forKey:key];
+            }
         }
         
         return allEmbedded;
