@@ -58,12 +58,16 @@ static NSMutableDictionary *p_classesForRelations;
                 NSArray *linksForKey = @[];
                 
                 if ([linksDictionary[key] isKindOfClass:NSArray.class]) {
+                    
                     linksForKey = [MTLJSONAdapter modelsOfClass:MTLHALLink.class fromJSONArray:linksDictionary[key] error:nil];
-                } else {
+                } else if ([MTLJSONAdapter modelOfClass:MTLHALLink.class fromJSONDictionary:linksDictionary[key] error:nil]) {
+                    
                     linksForKey = @[[MTLJSONAdapter modelOfClass:MTLHALLink.class fromJSONDictionary:linksDictionary[key] error:nil]];
                 }
-                    
-                [links setObject:linksForKey forKey:key];
+                
+                if (linksForKey) {
+                    [links setObject:linksForKey forKey:key];
+                }
             }
         }
         
