@@ -1,4 +1,4 @@
-#import <Mantle-HAL/MTLHALResource.h>
+#import "MTLHALResource.h"
 
 #import "Address.h"
 
