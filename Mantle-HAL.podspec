@@ -11,6 +11,7 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = '10.8'
   
   s.source_files = "Classes", "*.{h,m}"
+  s.public_header_files = "Classes/*.h"
   s.requires_arc = true
   s.dependency "Mantle", "~> 1.5"
 end
