@@ -12,6 +12,7 @@ Pod::Spec.new do |s|
   
   s.source_files = "Classes", "*.{h,m}"
   s.public_header_files = "Classes/*.h"
+  s.private_header_files = "Classes/Mantle-HAL.h"
   s.requires_arc = true
   s.dependency "Mantle", "~> 1.5"
 end
