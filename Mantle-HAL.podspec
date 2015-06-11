@@ -9,10 +9,11 @@ Pod::Spec.new do |s|
   
   s.ios.deployment_target = '6.0'
   s.osx.deployment_target = '10.8'
-  
+
+  s.dependency "Mantle", "~> 1.5"
   s.source_files = "Classes", "*.{h,m}"
   s.public_header_files = "Classes/*.h"
   s.private_header_files = "Classes/Mantle-HAL.h"
   s.requires_arc = true
-  s.dependency "Mantle", "~> 1.5"
+  s.module_name = 'MantleHAL'
 end
