@@ -45,7 +45,7 @@ static NSMutableDictionary *p_classesForRelations;
     return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSArray *curieArray) {
         return [MTLJSONAdapter modelsOfClass:MTLHALLink.class fromJSONArray:curieArray error:nil];
     } reverseBlock:^id(NSArray *curies) {
-        return [MTLJSONAdapter JSONArrayFromModels:curies];
+        return [MTLJSONAdapter JSONArrayFromModels:(curies != nil ? curies : @[])];
     }];
 }
 
@@ -58,10 +58,8 @@ static NSMutableDictionary *p_classesForRelations;
                 NSArray *linksForKey = @[];
                 
                 if ([linksDictionary[key] isKindOfClass:NSArray.class]) {
-                    
                     linksForKey = [MTLJSONAdapter modelsOfClass:MTLHALLink.class fromJSONArray:linksDictionary[key] error:nil];
                 } else if ([MTLJSONAdapter modelOfClass:MTLHALLink.class fromJSONDictionary:linksDictionary[key] error:nil]) {
-                    
                     linksForKey = @[[MTLJSONAdapter modelOfClass:MTLHALLink.class fromJSONDictionary:linksDictionary[key] error:nil]];
                 }
                 

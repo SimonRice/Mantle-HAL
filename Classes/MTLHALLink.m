@@ -30,4 +30,16 @@
              };
 }
 
++ (NSValueTransformer *)isTemplatedJSONTransformer {
+    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^id(id templated) {
+        if ([templated isKindOfClass:NSString.class]) {
+            return @([((NSString *)templated).lowercaseString isEqual:@"true"]);
+        } else {
+            return @([templated boolValue]);
+        }
+    } reverseBlock:^id(id templated) {
+        return templated;
+    }];
+}
+
 @end
