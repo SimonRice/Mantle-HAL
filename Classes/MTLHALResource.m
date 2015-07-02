@@ -188,10 +188,22 @@ static NSMutableDictionary *p_classesForRelations;
 
 - (MTLHALResource *)resourceForRelation:(NSString *)relation {
 
-    if (self.embedded[relation] == [NSNull null])
+    if (self.embedded[relation] == [NSNull null]) {
+        
         return nil;
-    else
+    }
+    else if (![self resourcesForRelation:relation]) {
+        
+        return nil;
+    }
+    else if ([self resourcesForRelation:relation].count == 0) {
+        
+        return nil;
+    }
+    else {
+        
         return [self resourcesForRelation:relation][0];
+    }
 }
 
 + (void)registerClass:(__unsafe_unretained Class)targetClass forRelation:(NSString *)relation
