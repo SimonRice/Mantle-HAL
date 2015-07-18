@@ -1,0 +1,6 @@
+framework module MantleHAL {
+  umbrella header "Pods-Mantle-HAL_Tests-Mantle-HAL-umbrella.h"
+
+  export *
+  module * { export * }
+}

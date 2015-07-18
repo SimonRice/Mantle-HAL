@@ -1,2 +1,0 @@
-PODS_OSX_SPECTA_FRAMEWORK_SEARCH_PATHS = $(inherited) "$(DEVELOPER_LIBRARY_DIR)/Frameworks" "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-PODS_OSX_SPECTA_OTHER_LDFLAGS = -framework "Foundation" -framework "XCTest"
