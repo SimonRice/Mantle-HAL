@@ -77,6 +77,8 @@ Mantle currently doesn't work with Swift objects, so you'll have to write your r
 
 As everyone says, GitHub is about social coding - I didn't just choose to use it because of my love of git as a version control system.  Please do chip in & help make this an even better project, or even file in an issue if you see anything not working right.
 
+For v1.1, extra credit must be given to @remixnine, who made a number of contibutions and bug fixes.
+
 ## License
 
 Usage is provided under the [MIT License](http://opensource.org/licenses/mit-license.php).  See the `LICENSE` file or any class header for the full details.
