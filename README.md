@@ -1,6 +1,6 @@
 # Mantle-HAL
 
-[![CI Status](http://img.shields.io/travis/simonrice/Mantle-HAL.svg?style=flat)](https://travis-ci.org/Simon Rice/Mantle-HAL)
+[![CI Status](http://img.shields.io/travis/simonrice/Mantle-HAL.svg?style=flat)](https://travis-ci.org/SimonRice/Mantle-HAL)
 [![Version](https://img.shields.io/cocoapods/v/Mantle-HAL.svg?style=flat)](http://cocoapods.org/pods/Mantle-HAL)
 [![License](https://img.shields.io/cocoapods/l/Mantle-HAL.svg?style=flat)](http://cocoapods.org/pods/Mantle-HAL)
 [![Platform](https://img.shields.io/cocoapods/p/Mantle-HAL.svg?style=flat)](http://cocoapods.org/pods/Mantle-HAL)
